@@ -13,7 +13,7 @@ class App extends Component {
       peopleCount: 0,
       eachShare: 0,
       rating: "",
-      showBill: true,
+      showBill: false,
       rates: [
         {
           quality: "ExcelLent",
@@ -36,15 +36,38 @@ class App extends Component {
           tip: 0,
         },
       ],
+      errorMsg: "",
+      error: false,
     };
   }
 
+  showError = (props) => {
+    this.setState({
+      errorMsg: props,
+      error: true,
+    });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const { rating, tip, billAmount, totalBill, peopleCount } = this.state;
+    const { billAmount, peopleCount, rating } = this.state;
+
+    if (billAmount === 0) {
+      this.showError("Please enter Valid bill amount!!");
+      return;
+    }
+    if (rating === "") {
+      this.showError("Please rate our service!!");
+      return;
+    }
+    if (peopleCount === 0) {
+      this.showError(
+        "Please enter among how many people bill has to be distributed!!"
+      );
+      return;
+    }
+
     this.state.rates.map((rate, i) => {
-      console.log(rate.quality);
-      console.log("rating", this.state.rating);
       if (rate.quality === this.state.rating) {
         var tip = rate.tip * billAmount;
         var totalBill = parseInt(billAmount) + parseInt(tip);
@@ -52,8 +75,10 @@ class App extends Component {
           tip: tip,
           totalBill: totalBill,
           eachShare: totalBill / peopleCount,
+          showBill: true,
         });
       }
+      return 0;
     });
   };
 
@@ -78,10 +103,16 @@ class App extends Component {
   render() {
     return (
       <div className="Container">
-        <div class="row">
-          <div class="col-md-6 mx-auto">
-            <div class="card card-body text-center mt-5">
-              <h1 class="heading display-5 pb-3">Tip Calculator</h1>
+        <div className="row">
+          <div className="col-md-6 mx-auto">
+            <div className="card card-body text-center mt-5">
+              <h1 className="heading display-5 pb-3">Tip Calculator</h1>
+              {this.state.error ? (
+                <div className="alert alert-danger" role="alert">
+                  {this.state.errorMsg}
+                </div>
+              ) : null}
+
               <Calculator
                 services={this.handleservices}
                 rates={this.state.rates}

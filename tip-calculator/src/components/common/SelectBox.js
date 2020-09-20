@@ -2,20 +2,24 @@ import React from "react";
 
 const SelectBox = (props) => {
   return (
-    <div class="form-group">
+    <div className="form-group">
       <div className="input-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label textLabel">
+        <label className="col-sm-3 col-form-label textLabel">
           {props.label}
         </label>
 
         <select
-          class="form-control col-sm-9"
+          className="form-control col-sm-9"
           id="exampleFormControlSelect1"
           onChange={props.handleChange}
         >
-          <option>Rate Us</option>
+          <option key="Rate Us">Choose rating</option>
           {props.rates.map((rate, i) => {
-            return <option id={i}>{rate.quality}</option>;
+            return (
+              <option key={i} value={rate.quality}>
+                {rate.quality} , So tip is {rate.tip * 100}%{" "}
+              </option>
+            );
           })}
         </select>
       </div>

@@ -25,7 +25,11 @@ const Calculator = (props) => {
         label="Share Among:"
         span={false}
       />
-      <button type="submit" class="btn btn-success" onClick={props.onCalculate}>
+      <button
+        type="submit"
+        className="btn btn-success"
+        onClick={props.onCalculate}
+      >
         Calculate
       </button>
     </div>

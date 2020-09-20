@@ -3,7 +3,7 @@ import Label from "./common/Label";
 
 const Result = (props) => {
   return (
-    <div id="results" class="rounded-box results-box">
+    <div id="results" className="rounded-box results-box">
       <Label label="Tip Amount :" value={props.tip} />
       <Label label="Total Bill :" value={props.totalBill} />
       <Label label="Each Share :" value={props.eachShare} />
