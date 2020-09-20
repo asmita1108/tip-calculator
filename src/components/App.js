@@ -76,6 +76,7 @@ class App extends Component {
           totalBill: totalBill,
           eachShare: totalBill / peopleCount,
           showBill: true,
+		  error: false,
         });
       }
       return 0;
